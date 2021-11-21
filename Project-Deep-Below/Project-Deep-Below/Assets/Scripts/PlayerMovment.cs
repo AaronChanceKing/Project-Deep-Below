@@ -16,7 +16,9 @@ public class PlayerMovment : MonoBehaviour
     //For movment
     private CharacterController controller;
     [SerializeField] private float moveLimiter;
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float baseSpeed = 5f;
+    [SerializeField] private float sprintSpeed = 8f;
+    private float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,9 @@ public class PlayerMovment : MonoBehaviour
         //Get the inputs of the player
         Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector3 mousePosition = Input.mousePosition;
+
+        //Is sprint button pushed down
+        speed = Input.GetButton("Sprint") ? sprintSpeed : baseSpeed;
 
         //Move thoes inputs to outside methods
         PlayerMove(move);
@@ -67,4 +72,43 @@ public class PlayerMovment : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
+
+    #region Getters
+    //Returns the base speed of the character
+    public float GetBaseSpeed
+    {
+        get
+        {
+            return baseSpeed;
+        }
+    }
+    //Returns the sprint speed of the character
+    public float GetSprintSpeed
+    {
+        get
+        {
+            return sprintSpeed;
+        }
+    }
+    #endregion
+
+    #region Setters
+    //Set the base speed
+    public float SetBaseSpeed
+    {
+        set
+        {
+            baseSpeed = value;
+        }
+    }
+
+    //Set the sprint speed
+    public float SetSprintSpeed
+    {
+        set
+        {
+            sprintSpeed = value;
+        }
+    }
+    #endregion
 }
