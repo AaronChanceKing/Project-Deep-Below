@@ -1061,14 +1061,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3061686595195963398, guid: 74074f0b15e46c8448836e3869cc5c8f, type: 3}
-      propertyPath: m_SlopeLimit
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3061686595195963398, guid: 74074f0b15e46c8448836e3869cc5c8f, type: 3}
-      propertyPath: m_StepOffset
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6237730243603332941, guid: 74074f0b15e46c8448836e3869cc5c8f, type: 3}
       propertyPath: m_Name
       value: Player
