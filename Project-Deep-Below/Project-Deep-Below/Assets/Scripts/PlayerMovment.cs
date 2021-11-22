@@ -2,29 +2,27 @@
 //Creater: King
 //Date: 11/21/21
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovment : MonoBehaviour
 {
     //Variables
     //To Add Later
-    private Animator animator;
-    private AudioSource audioSorce;
+    //private Animator animator;
+    //private AudioSource audioSorce;
 
     //For movment
     private CharacterController controller;
-    [SerializeField] private float moveLimiter;
-    [SerializeField] private float baseSpeed = 5f;
-    [SerializeField] private float sprintSpeed = 8f;
+    private PlayerStats stats;
     private float speed;
 
     // Start is called before the first frame update
     void Start()
     {
         //Get access to character controller
-        controller = GetComponent<CharacterController>();
+        controller = this.GetComponent<CharacterController>();
+        //Get access to player stats
+        stats = this.GetComponent<PlayerStats>();
 
         //TODO
         //animator = GetComponent<Animator>();
@@ -39,19 +37,21 @@ public class PlayerMovment : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
 
         //Is sprint button pushed down
-        speed = Input.GetButton("Sprint") ? sprintSpeed : baseSpeed;
+        speed = Input.GetButton("Sprint") && stats.Stamina > 0 ? stats.SprintSpeed : stats.BaseSpeed;
 
         //Move thoes inputs to outside methods
         PlayerMove(move);
         PlayerDirection(mousePosition);
+        DrainStamina(move);
     }
 
     //Method used for moving the character controller
     private void PlayerMove(Vector2 _Speed)
     {
+        //Takes in absolute value of speed to always return a positive number
         if (Mathf.Abs(_Speed.x) >= 0 && Mathf.Abs(_Speed.y) >= 0)
         {
-            controller.Move(_Speed * Time.deltaTime * (speed * moveLimiter));
+            controller.Move(_Speed * Time.deltaTime * (speed * stats.MoveLimiter));
         }
         else
         {
@@ -73,42 +73,24 @@ public class PlayerMovment : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    #region Getters
-    //Returns the base speed of the character
-    public float GetBaseSpeed
+    private void DrainStamina(Vector3 _Speed)
     {
-        get
+        if(Mathf.Abs(_Speed.x) > 0 || Mathf.Abs(_Speed.y) > 0)
         {
-            return baseSpeed;
+            if (speed > stats.BaseSpeed && stats.Stamina > 0)
+            {
+                stats.Stamina -= (stats.StaminaDrain * 2);
+            }
         }
-    }
-    //Returns the sprint speed of the character
-    public float GetSprintSpeed
-    {
-        get
+        //Need to remain still to gain stamina back
+        else if(_Speed.x == 0 && _Speed.y == 0)
         {
-            return sprintSpeed;
+            if (stats.Stamina < stats.MaxStamina)
+            {
+                stats.Stamina += stats.StaminaDrain;
+            }
         }
-    }
-    #endregion
 
-    #region Setters
-    //Set the base speed
-    public float SetBaseSpeed
-    {
-        set
-        {
-            baseSpeed = value;
-        }
     }
 
-    //Set the sprint speed
-    public float SetSprintSpeed
-    {
-        set
-        {
-            sprintSpeed = value;
-        }
-    }
-    #endregion
 }

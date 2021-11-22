@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PickUp
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,9 +16,9 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - Forground
+  - PickUp
+  - Foreground
   - Boarder
-  - 
   - 
   - 
   - 
@@ -40,4 +42,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1623727573
+    locked: 0
+  - name: Player
+    uniqueID: 444061809
+    locked: 0
+  - name: Enemy
+    uniqueID: 2114746045
+    locked: 0
+  - name: PickUP
+    uniqueID: 1270533687
+    locked: 0
+  - name: Foreground
+    uniqueID: 1491732565
+    locked: 0
+  - name: Boarder
+    uniqueID: 2189555145
     locked: 0

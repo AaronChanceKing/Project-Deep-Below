@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6590965624048295966}
   - component: {fileID: 5466158429245039237}
   m_Layer: 7
-  m_Name: Circle
+  m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 444061809
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.9811321, g: 0.087931626, b: 0.087931626, a: 1}
@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 3061686595195963398}
   - component: {fileID: 6237730243603332946}
   - component: {fileID: 7004582673431218082}
+  - component: {fileID: 5056837759802896527}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -171,8 +172,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 444061809
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 0.0141509175, b: 0.0141509175, a: 1}
@@ -197,6 +198,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7411e89c98c014fa027475aef8b289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveLimiter: 0.5
+--- !u!114 &5056837759802896527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6237730243603332941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ba65f4a53093d408ddff8255ea3924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stamina: 5
+  maxStamina: 5
+  staminaDrain: 0.001
+  health: 0
+  maxHealth: 0
   baseSpeed: 10
   sprintSpeed: 16
+  moveLimiter: 0.5
+  baseDamage: 0
+  heavyDamage: 0
+  levelUpStamina: 0
+  levelUpHealth: 0
