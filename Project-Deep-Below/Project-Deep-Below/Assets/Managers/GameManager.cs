@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         UpdateGameState(gameState);
     }
 
+
     public void UpdateGameState(GameState _gameState)
     {
         gameState = _gameState;
@@ -83,9 +84,18 @@ public class GameManager : MonoBehaviour
         playerStats = player.GetComponent<PlayerStats>();
     }
 
+    //Rescan the enemys walkable area
+    private void Rescan()
+    {
+        AstarPath.active.Scan();
+    }
 
     public PlayerStats PlayerStats
     {
         get => playerStats;
+    }
+    public GameObject Player
+    {
+        get => player;
     }
 }
