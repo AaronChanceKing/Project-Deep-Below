@@ -4917,6 +4917,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5951aae9cd8318e43a18d3f5662b8929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  location: {x: 1, y: 0}
+  rotation: {x: 0, y: 0, z: -13}
+  melee: 1
 --- !u!114 &4290171154557580710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4931,6 +4934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 1
   heavyDamage: 2
+  penetrate: 0
 --- !u!114 &3726015937004371788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4938,7 +4942,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6150318882036002577}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c075333f3b20ff748abcaa1c49ac5cc3, type: 3}
   m_Name: 
@@ -4947,6 +4951,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   enemiesHit: []
-  attackRange: 1
+  attackRange: 1.5
   attackRate: 2
   heavyAttackRate: 4

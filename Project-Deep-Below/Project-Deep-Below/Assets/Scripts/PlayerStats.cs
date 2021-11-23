@@ -23,6 +23,7 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private int baseDamage;
     [SerializeField] private int heavyDamage;
+    [SerializeField] private bool penetrateDamage;
 
     private int playerLevel = 1;
     private float playerEXP = 0;
@@ -133,7 +134,12 @@ public class PlayerStats : MonoBehaviour
     {
         get => maxHealth;
     }
-
+    //Set if player damage will penetrate enemys
+    public bool Penetrate
+    {
+        get => penetrateDamage;
+        set => penetrateDamage = value;
+    }
 
     #endregion
 

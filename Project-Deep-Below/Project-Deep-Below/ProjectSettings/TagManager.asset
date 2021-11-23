@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PickUp
   - Enemy
+  - Bullet
+  - Boarder
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - PickUp
   - Foreground
   - Boarder
-  - 
+  - Bullet
   - 
   - 
   - 
@@ -60,4 +62,7 @@ TagManager:
     locked: 0
   - name: Boarder
     uniqueID: 2189555145
+    locked: 0
+  - name: Bullet
+    uniqueID: 4204032591
     locked: 0

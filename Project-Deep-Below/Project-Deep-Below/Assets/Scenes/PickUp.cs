@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
+    [SerializeField] private Vector2 location;
+    [SerializeField] private Vector3 rotation;
+    [SerializeField] private bool melee;
+
    public void OnTriggerEnter(Collider _other)
     {
         if(_other.tag == "Player")
@@ -30,9 +34,19 @@ public class PickUp : MonoBehaviour
 
             //Add Logic for picking up
             transform.parent = _player.transform;
-            transform.localPosition = new Vector2(1, 0);
-            transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -13));
+            transform.localPosition = location;
+            transform.localRotation = Quaternion.Euler(rotation);
+
+            if(melee)
+            {
+                this.GetComponent<MeleeCombat>().enabled = true;
+            }
+            else
+            {
+                this.GetComponent<RangeCombat>().enabled = true;
+            }
         }
+
     }
 
     //TODO
