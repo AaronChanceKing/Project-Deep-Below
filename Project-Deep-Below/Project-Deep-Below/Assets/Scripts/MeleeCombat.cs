@@ -15,7 +15,7 @@ public class MeleeCombat : MonoBehaviour
     [SerializeField] float heavyAttackRate = 4f;
     float heavyAttackBuffer = 0f;
 
-    private float damage = 0;
+    private int damage = 0;
 
     private void Update()
     {
@@ -40,13 +40,13 @@ public class MeleeCombat : MonoBehaviour
         {
             if(_AttackChoice == 1)
             {
-                damage = (float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.BaseDamage), 1);
+                damage = (int)((float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.BaseDamage), 1) * 10);
             }
             else if(_AttackChoice == 2)
             {
-                damage = (float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.HeavyDamage), 1);
+                damage = (int)((float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.HeavyDamage), 1) * 10);
             }
-            //enemy.GetComponent<EnemyStats>().Damage(damage);
+            enemy.GetComponent<EnemyStats>().Damage(damage);
             Debug.Log(enemy.name + " hit for " + damage);
         }
     }

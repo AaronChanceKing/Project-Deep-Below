@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangeAttack : MonoBehaviour
 {
-    [SerializeField] private float damage;
+    [SerializeField] private int damage;
     [SerializeField] private float speed;
 
     private void Start()
@@ -30,7 +30,7 @@ public class RangeAttack : MonoBehaviour
 
     private void Damage(Collider _enemy)
     {
-        //_enemy.GetComponent<EnemyStats>().Damage(damage);
+        _enemy.GetComponent<EnemyStats>().Damage(damage);
 
         //Penetrate damage goes through enemys till it hits a wall
         if(!GameManager.Instance.PlayerStats.Penetrate)
@@ -46,7 +46,7 @@ public class RangeAttack : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public float SetDamage
+    public int SetDamage
     {
         set => damage = value;
     }

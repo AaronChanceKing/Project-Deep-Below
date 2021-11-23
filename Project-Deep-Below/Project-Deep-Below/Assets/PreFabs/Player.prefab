@@ -213,12 +213,13 @@ MonoBehaviour:
   stamina: 5
   maxStamina: 5
   staminaDrain: 0.001
-  health: 0
-  maxHealth: 0
+  health: 20
+  maxHealth: 20
   baseSpeed: 10
   sprintSpeed: 16
-  moveLimiter: 0.5
+  moveLimiter: 0.4
   baseDamage: 0
   heavyDamage: 0
+  penetrateDamage: 0
   levelUpStamina: 0
   levelUpHealth: 0

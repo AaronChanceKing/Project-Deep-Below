@@ -62,17 +62,17 @@ public class RangeCombat : MonoBehaviour
         //Set damage of the bullet
         if (_AttackChoice == 1)
         {
-            bullet.GetComponent<RangeAttack>().SetDamage = (float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.BaseDamage), 1);
+            bullet.GetComponent<RangeAttack>().SetDamage = (int)((float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.BaseDamage), 1) * 10);
         }
         else if(_AttackChoice == 2 && clip >= 2)
         {
-            bullet.GetComponent<RangeAttack>().SetDamage = (float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.HeavyDamage), 1);
+            bullet.GetComponent<RangeAttack>().SetDamage = (int)((float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.HeavyDamage), 1) * 10);
             clip--;
         }
         //If you dont have enough bullets for heavy ranged damage will be cut down
         else
         {
-            bullet.GetComponent<RangeAttack>().SetDamage = (float)Math.Round((UnityEngine.Random.Range(0.00f, 1.00f) * GameManager.Instance.PlayerStats.BaseDamage), 1);
+            bullet.GetComponent<RangeAttack>().SetDamage = (int)((float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.BaseDamage), 1) * 10);
         }
 
         Instantiate(bullet, muzzel.transform.position, this.transform.rotation);
