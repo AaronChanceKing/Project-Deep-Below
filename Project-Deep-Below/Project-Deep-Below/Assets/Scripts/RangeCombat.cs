@@ -83,4 +83,13 @@ public class RangeCombat : MonoBehaviour
     {
         clip = clipMax;
     }
+
+    public int Clip
+    {
+        get => clip;
+    }
+    public int ClipMax
+    {
+        get => clipMax;
+    }
 }

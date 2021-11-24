@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5257388338751245896}
   - component: {fileID: 5257388338751245897}
   - component: {fileID: 1132843354}
-  - component: {fileID: 6529837003099379527}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -101,15 +100,3 @@ MonoBehaviour:
     pivotPointRoot: {fileID: 0}
     spreadOutCount: 1
   showGraphs: 1
---- !u!114 &6529837003099379527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5257388338751245894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f781504b543dde4428a0a6e0efb55b15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
