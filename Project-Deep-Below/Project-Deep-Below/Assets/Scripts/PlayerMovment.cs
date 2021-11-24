@@ -2,6 +2,7 @@
 //Creater: King
 //Date: 11/21/21
 
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovment : MonoBehaviour
@@ -15,6 +16,10 @@ public class PlayerMovment : MonoBehaviour
     private CharacterController controller;
     private PlayerStats stats;
     private float speed;
+
+    [SerializeField] float RollRate = 1.0f;
+    float rollBuffer = 0f;
+    bool rolling = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,10 +37,22 @@ public class PlayerMovment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Get the inputs of the player
         Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector3 mousePosition = Input.mousePosition;
 
+        //Initiate roll
+        if (Input.GetButtonDown("Roll") && Time.time >= rollBuffer)
+        {
+            rollBuffer = Time.time + RollRate;
+            rolling = true;
+            StartCoroutine(PlayerRoll());
+        }
+        if (rolling)
+        {
+            controller.Move(move * stats.Roll * Time.deltaTime);
+        }
         //Is sprint button pushed down
         speed = Input.GetButton("Sprint") && stats.Stamina > 0 ? stats.SprintSpeed : stats.BaseSpeed;
 
@@ -71,6 +88,13 @@ public class PlayerMovment : MonoBehaviour
 
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
+    IEnumerator PlayerRoll()
+    {
+        yield return new WaitForSeconds(stats.RollDistance);
+
+        rolling = false;
     }
 
     private void DrainStamina(Vector3 _Speed)

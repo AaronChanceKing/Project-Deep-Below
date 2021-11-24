@@ -1887,18 +1887,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5056837759802896527, guid: 74074f0b15e46c8448836e3869cc5c8f, type: 3}
-      propertyPath: health
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056837759802896527, guid: 74074f0b15e46c8448836e3869cc5c8f, type: 3}
-      propertyPath: levelUpHealth
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056837759802896527, guid: 74074f0b15e46c8448836e3869cc5c8f, type: 3}
-      propertyPath: levelUpStamina
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6237730243603332941, guid: 74074f0b15e46c8448836e3869cc5c8f, type: 3}
       propertyPath: m_Name
       value: Player

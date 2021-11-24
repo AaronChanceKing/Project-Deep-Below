@@ -19,7 +19,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseSpeed = 10f;
     [SerializeField] private float sprintSpeed = 16f;
     [SerializeField] private float moveLimiter = .5f;
-    //private float rollDistance;
+    [SerializeField] private float rollSpeed;
+    [Range (.05f, .30f)]
+    [SerializeField] private float rollDistance;
 
     [SerializeField] private int baseDamage;
     [SerializeField] private int heavyDamage;
@@ -139,6 +141,16 @@ public class PlayerStats : MonoBehaviour
     {
         get => penetrateDamage;
         set => penetrateDamage = value;
+    }
+    //Returns the roll Distance of player
+    public float Roll
+    {
+        get => rollSpeed;
+    }
+    //Retruns the roll time of player
+    public float RollDistance
+    {
+        get => rollDistance;
     }
 
     #endregion
