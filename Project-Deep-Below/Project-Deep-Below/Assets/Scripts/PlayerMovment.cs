@@ -39,7 +39,7 @@ public class PlayerMovment : MonoBehaviour
     {
 
         //Get the inputs of the player
-        Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         Vector3 mousePosition = Input.mousePosition;
 
         //Initiate roll
@@ -63,10 +63,10 @@ public class PlayerMovment : MonoBehaviour
     }
 
     //Method used for moving the character controller
-    private void PlayerMove(Vector2 _Speed)
+    private void PlayerMove(Vector3 _Speed)
     {
         //Takes in absolute value of speed to always return a positive number
-        if (Mathf.Abs(_Speed.x) >= 0 && Mathf.Abs(_Speed.y) >= 0)
+        if (Mathf.Abs(_Speed.x) >= 0 && Mathf.Abs(_Speed.z) >= 0)
         {
             controller.Move(_Speed * Time.deltaTime * (speed * stats.MoveLimiter));
         }
@@ -84,10 +84,10 @@ public class PlayerMovment : MonoBehaviour
         _MousePosition.x = _MousePosition.x - playerPosition.x;
         _MousePosition.y = _MousePosition.y - playerPosition.y;
 
-        float angle = Mathf.Atan2(_MousePosition.y, _MousePosition.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(_MousePosition.x, _MousePosition.y) * Mathf.Rad2Deg;
 
 
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
     }
 
     IEnumerator PlayerRoll()
@@ -99,7 +99,7 @@ public class PlayerMovment : MonoBehaviour
 
     private void DrainStamina(Vector3 _Speed)
     {
-        if(Mathf.Abs(_Speed.x) > 0 || Mathf.Abs(_Speed.y) > 0)
+        if(Mathf.Abs(_Speed.x) > 0 || Mathf.Abs(_Speed.z) > 0)
         {
             if (speed > stats.BaseSpeed && stats.Stamina > 0)
             {
@@ -107,7 +107,7 @@ public class PlayerMovment : MonoBehaviour
             }
         }
         //Need to remain still to gain stamina back
-        else if(_Speed.x == 0 && _Speed.y == 0)
+        else if(_Speed.x == 0 && _Speed.z == 0)
         {
             if (stats.Stamina < stats.MaxStamina)
             {

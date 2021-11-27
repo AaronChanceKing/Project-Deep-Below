@@ -21,7 +21,7 @@ public class MeleeCombat : MonoBehaviour
     {
         enemiesHit = Physics.OverlapSphere(transform.position, attackRange, enemyLayer);
         //Delay for base attack
-        if(Time.time >= attackBuffer && Input.GetButton("Fire1"))
+        if(Time.time >= attackBuffer && Input.GetButtonDown("Fire1"))
         {
             Attack(1);
             attackBuffer = Time.time + attackRate;
