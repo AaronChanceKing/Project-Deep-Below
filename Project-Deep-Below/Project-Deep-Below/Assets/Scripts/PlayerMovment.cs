@@ -9,15 +9,15 @@ public class PlayerMovment : MonoBehaviour
 {
     //Variables
     //To Add Later
-    //private Animator animator;
+    private Animator animator;
     //private AudioSource audioSorce;
+    [SerializeField] private Camera cam;
 
     //For movment
     private CharacterController controller;
     private PlayerStats stats;
     private float speed;
 
-    [SerializeField] float RollRate = 1.0f;
     float rollBuffer = 0f;
     bool rolling = false;
 
@@ -30,22 +30,21 @@ public class PlayerMovment : MonoBehaviour
         stats = this.GetComponent<PlayerStats>();
 
         //TODO
-        //animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         //audioSorce = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         //Get the inputs of the player
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         Vector3 mousePosition = Input.mousePosition;
 
         //Initiate roll
         if (Input.GetButtonDown("Roll") && Time.time >= rollBuffer)
         {
-            rollBuffer = Time.time + RollRate;
+            rollBuffer = Time.time + stats.RollRate;
             rolling = true;
             StartCoroutine(PlayerRoll());
         }
@@ -57,20 +56,33 @@ public class PlayerMovment : MonoBehaviour
         speed = Input.GetButton("Sprint") && stats.Stamina > 0 ? stats.SprintSpeed : stats.BaseSpeed;
 
         //Move thoes inputs to outside methods
-        PlayerMove(move);
         PlayerDirection(mousePosition);
+        PlayerMove(move);
+        //PlayerDirectionThird(mousePosition);
+        //PlayerMoveThird(move);
         DrainStamina(move);
     }
 
     //Method used for moving the character controller
     private void PlayerMove(Vector3 _Speed)
     {
-        //Takes in absolute value of speed to always return a positive number
-        if (Mathf.Abs(_Speed.x) >= 0 && Mathf.Abs(_Speed.z) >= 0)
+        if (_Speed.magnitude >= .1f)
         {
-            controller.Move(_Speed * Time.deltaTime * (speed * stats.MoveLimiter));
+            controller.Move(_Speed * Time.deltaTime * speed);
         }
-        else
+
+        animator.SetFloat("Speed", (Mathf.Abs(_Speed.x) + Mathf.Abs(_Speed.z)));
+        
+    }
+    //Method for 3rd person movment
+    private void PlayerMoveThird(Vector3 _Speed)
+    {
+        Vector3 moveX = cam.transform.right * _Speed.x;
+        Vector3 moveZ = transform.forward * _Speed.z;
+
+        _Speed = (moveX + moveZ);
+
+        if (_Speed.magnitude >= .1f)
         {
             controller.Move(_Speed * Time.deltaTime * speed);
         }
@@ -90,6 +102,11 @@ public class PlayerMovment : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
     }
 
+    private void PlayerDirectionThird(Vector3 _MousePosition)
+    {
+        transform.rotation = Quaternion.Euler(new Vector3(0, _MousePosition.x, 0));
+    }
+
     IEnumerator PlayerRoll()
     {
         yield return new WaitForSeconds(stats.RollDistance);
@@ -99,7 +116,7 @@ public class PlayerMovment : MonoBehaviour
 
     private void DrainStamina(Vector3 _Speed)
     {
-        if(Mathf.Abs(_Speed.x) > 0 || Mathf.Abs(_Speed.z) > 0)
+        if(_Speed.magnitude >= .1f)
         {
             if (speed > stats.BaseSpeed && stats.Stamina > 0)
             {
@@ -107,7 +124,7 @@ public class PlayerMovment : MonoBehaviour
             }
         }
         //Need to remain still to gain stamina back
-        else if(_Speed.x == 0 && _Speed.z == 0)
+        else if(_Speed.magnitude == 0)
         {
             if (stats.Stamina < stats.MaxStamina)
             {

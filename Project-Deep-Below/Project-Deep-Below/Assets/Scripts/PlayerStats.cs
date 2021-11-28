@@ -7,34 +7,47 @@ using System;
 
 public class PlayerStats : MonoBehaviour
 {
+    [SerializeField] private Animator animator;
+    [SerializeField] private RuntimeAnimatorController shootingController;
+    [SerializeField] private RuntimeAnimatorController unarmedController;
+    [Space] [Space]
     [SerializeField] private float stamina = 5;
     [SerializeField] private float maxStamina = 5;
     [SerializeField] private float staminaDrain = .01f;
-    [Space]
-    [Space]
+    [Space] [Space]
     [SerializeField] private int health;
     [SerializeField] private int maxHealth;
-    [Space]
-    [Space]
+    [Space] [Space]
     [SerializeField] private float baseSpeed = 10f;
     [SerializeField] private float sprintSpeed = 16f;
-    [SerializeField] private float moveLimiter = .5f;
+    [Space] [Space]
     [SerializeField] private float rollSpeed;
     [Range (.05f, .30f)]
     [SerializeField] private float rollDistance;
-
+    [SerializeField] private float rollRate = 1f;
+    [Space] [Space]
     [SerializeField] private int baseDamage;
     [SerializeField] private int heavyDamage;
     [SerializeField] private bool penetrateDamage;
-
+    [Space] [Space]
     private int playerLevel = 1;
     private float playerEXP = 0;
     private float playerEXPMultipliyer = 100;
-    [Space]
-    [Space]
+    [Space] [Space]
     [SerializeField] private float levelUpStamina;
     [SerializeField] private int levelUpHealth;
 
+    private void Update()
+    {
+        if(this.GetComponentInChildren<RangeCombat>())
+        {
+            animator.runtimeAnimatorController = shootingController;
+        }
+        else
+        {
+            animator.runtimeAnimatorController = unarmedController;
+        }
+    }
     //Damage the player
     //Takes in INT
     public void DamagePlayer(int _Damage)
@@ -88,11 +101,6 @@ public class PlayerStats : MonoBehaviour
     public float SprintSpeed
     {
         get => sprintSpeed;
-    }
-    //Returns the move limiter on character movment
-    public float MoveLimiter
-    {
-        get => moveLimiter;
     }
     //Returns the stamina of player
     public float Stamina
@@ -151,6 +159,16 @@ public class PlayerStats : MonoBehaviour
     public float RollDistance
     {
         get => rollDistance;
+    }
+    //Returns the rolling rate
+    public float RollRate
+    {
+        get => rollRate;
+    }
+    //Returns animator 
+    public Animator Animation
+    {
+        get => animator;
     }
 
     #endregion

@@ -58,6 +58,7 @@ public class RangeCombat : MonoBehaviour
     {
         //Set speed of the bullet
         bullet.GetComponent<RangeAttack>().Speed = speed;
+        GameManager.Instance.PlayerStats.Animation.SetTrigger("Shoot");
 
         //Set damage of the bullet
         if (_AttackChoice == 1)

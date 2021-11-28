@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    [SerializeField] private Vector2 location;
+    [SerializeField] private GameObject parent;
+    [SerializeField] private Vector3 location;
     [SerializeField] private Vector3 rotation;
     [SerializeField] private bool melee;
 
@@ -33,7 +34,7 @@ public class PickUp : MonoBehaviour
             this.GetComponent<UpgradeScript>().UpgradePlayer(_player);
 
             //Add Logic for picking up
-            transform.parent = _player.transform;
+            transform.parent = parent.transform;
             transform.localPosition = location;
             transform.localRotation = Quaternion.Euler(rotation);
 

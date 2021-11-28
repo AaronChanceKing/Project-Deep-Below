@@ -26,12 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2458550494757635729}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.53}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 176428638179034574}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!198 &6839045427514327131
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4830,7 +4830,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4792411624441304543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0095, y: -0.0776, z: 0.697}
+  m_LocalPosition: {x: -0.0071, y: -0.0776, z: 0.1639}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 176428638179034574}
@@ -4937,8 +4937,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5951aae9cd8318e43a18d3f5662b8929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  location: {x: 0, y: 0.6612}
-  rotation: {x: 0, y: 90, z: -90}
+  parent: {fileID: 0}
+  location: {x: -3.82, y: 13.53, z: 3.26}
+  rotation: {x: -70.717, y: 0, z: -108.323}
   melee: 0
 --- !u!114 &3552809299733252905
 MonoBehaviour:
@@ -4969,7 +4970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 8587214317177585914, guid: 7248d311a02927a47949b7cabf014305, type: 3}
   muzzel: {fileID: 4792411624441304543}
-  speed: 10
+  speed: 30
   clip: 6
   attackRate: 1
   heavyAttackRate: 4
@@ -5035,4 +5036,4 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.4
-  m_Center: {x: -0.009330064, y: -0.026371293, z: 0.5736747}
+  m_Center: {x: 0, y: 0, z: 0}

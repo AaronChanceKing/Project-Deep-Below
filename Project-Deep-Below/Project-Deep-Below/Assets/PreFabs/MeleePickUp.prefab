@@ -4854,8 +4854,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5951aae9cd8318e43a18d3f5662b8929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  location: {x: 1, y: 0}
-  rotation: {x: 0, y: 0, z: -13}
+  parent: {fileID: 0}
+  location: {x: 0.48, y: 0.667, z: 0}
+  rotation: {x: 0, y: 106.865, z: 0}
   melee: 1
 --- !u!114 &4290171154557580710
 MonoBehaviour:
