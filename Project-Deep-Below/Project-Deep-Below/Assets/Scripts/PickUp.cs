@@ -22,6 +22,7 @@ public class PickUp : MonoBehaviour
     private void AddItem(GameObject _player)
     {
         Destroy(this.GetComponentInChildren<ParticleSystem>());
+        Destroy(this.GetComponentInChildren<SpriteRenderer>());
 
         //If Player is already holding a weapon
         if(_player.GetComponentInChildren<PickUp>())

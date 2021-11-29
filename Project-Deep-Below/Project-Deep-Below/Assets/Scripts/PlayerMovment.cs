@@ -56,10 +56,16 @@ public class PlayerMovment : MonoBehaviour
         speed = Input.GetButton("Sprint") && stats.Stamina > 0 ? stats.SprintSpeed : stats.BaseSpeed;
 
         //Move thoes inputs to outside methods
-        PlayerDirection(mousePosition);
-        PlayerMove(move);
-        //PlayerDirectionThird(mousePosition);
-        //PlayerMoveThird(move);
+        if(cam.isActiveAndEnabled)
+        {
+            PlayerDirectionThird(mousePosition);
+            PlayerMoveThird(move);
+        }
+        else
+        {
+            PlayerDirection(mousePosition);
+            PlayerMove(move);
+        }
         DrainStamina(move);
     }
 

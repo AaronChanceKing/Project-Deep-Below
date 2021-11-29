@@ -1,19 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+//Bullet logic script
+//Creater: King
+//Date: 11/23/21
 using UnityEngine;
 
 public class RangeAttack : MonoBehaviour
 {
     [SerializeField] private int damage;
     [SerializeField] private float speed;
+    private float startheight;
 
     private void Start()
     {
+        startheight = this.transform.position.y;
         Invoke("CleanUp", 5f);
     }
     private void Update()
     {
-        this.transform.position = new Vector3(this.transform.position.x, .5f, this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x, startheight, this.transform.position.z);
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)

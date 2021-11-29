@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Bullet
   - Boarder
+  - 2D
   layers:
   - Default
   - TransparentFX
@@ -40,7 +41,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - 2D
   m_SortingLayers:
   - name: Default
     uniqueID: 0
