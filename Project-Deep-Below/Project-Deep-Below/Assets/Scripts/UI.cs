@@ -29,4 +29,9 @@ public class UI : MonoBehaviour
             ammo.SetActive(false);
         }
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
