@@ -6,15 +6,16 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    [SerializeField] private GameObject parent;
+    private GameObject parent;
     [SerializeField] private Vector3 location;
     [SerializeField] private Vector3 rotation;
     [SerializeField] private bool melee;
 
-   public void OnTriggerEnter(Collider _other)
+    public void OnTriggerEnter(Collider _other)
     {
         if(_other.tag == "Player")
         {
+            parent = GameManager.Instance.PlayerStats.PickUpTarget;
             AddItem(_other.gameObject);
         }
     }

@@ -124,6 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1883373178}
   shootingController: {fileID: 9100000, guid: fa5d32ee7d8ea1641a792b64ffc7cc2a, type: 2}
+  meleeController: {fileID: 9100000, guid: b745d6dbaea0e2c4989d022d20b43bb4, type: 2}
   unarmedController: {fileID: 9100000, guid: 18e9cbb13046bd447bbc7d04d17d5eb0, type: 2}
   stamina: 5
   maxStamina: 5
@@ -140,6 +141,7 @@ MonoBehaviour:
   penetrateDamage: 0
   levelUpStamina: 1
   levelUpHealth: 5
+  pickUpTarget: {fileID: 2321574179829341049}
 --- !u!143 &6817416368103001432
 CharacterController:
   m_ObjectHideFlags: 0
@@ -153,7 +155,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1
   m_Radius: 0.15
-  m_SlopeLimit: 45
+  m_SlopeLimit: 0
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -615,5 +617,10 @@ GameObject:
 --- !u!4 &149458085092069779 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 73df61e716785a645a852a88efc3a556, type: 3}
+  m_PrefabInstance: {fileID: 403144920577373816}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2321574179829341049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2715566404302941441, guid: 73df61e716785a645a852a88efc3a556, type: 3}
   m_PrefabInstance: {fileID: 403144920577373816}
   m_PrefabAsset: {fileID: 0}

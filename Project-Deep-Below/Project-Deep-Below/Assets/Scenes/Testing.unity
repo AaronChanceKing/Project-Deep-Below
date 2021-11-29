@@ -6042,14 +6042,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1730441239590010182, guid: 0f9e8e4c3244a9b4b9b9ebb1fb992258, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657682778238904501, guid: 0f9e8e4c3244a9b4b9b9ebb1fb992258, type: 3}
-      propertyPath: m_Constraints
-      value: 80
-      objectReference: {fileID: 0}
     - target: {fileID: 3778847705783979344, guid: 0f9e8e4c3244a9b4b9b9ebb1fb992258, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6097,18 +6089,6 @@ PrefabInstance:
     - target: {fileID: 3778847705783979358, guid: 0f9e8e4c3244a9b4b9b9ebb1fb992258, type: 3}
       propertyPath: m_Name
       value: TestEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8272233511660811370, guid: 0f9e8e4c3244a9b4b9b9ebb1fb992258, type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8272233511660811370, guid: 0f9e8e4c3244a9b4b9b9ebb1fb992258, type: 3}
-      propertyPath: m_Center.y
-      value: 0.53
-      objectReference: {fileID: 0}
-    - target: {fileID: 8272233511660811370, guid: 0f9e8e4c3244a9b4b9b9ebb1fb992258, type: 3}
-      propertyPath: m_Center.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f9e8e4c3244a9b4b9b9ebb1fb992258, type: 3}
@@ -9935,11 +9915,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004796268}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2024434278 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2321574179829341049, guid: 74074f0b15e46c8448836e3869cc5c8f, type: 3}
-  m_PrefabInstance: {fileID: 6237730243937321506}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2024529377
 GameObject:
   m_ObjectHideFlags: 0
@@ -10804,10 +10779,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 286166434, guid: 60e82e4201ec5bf4bb1b908279d491db, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 286166437, guid: 60e82e4201ec5bf4bb1b908279d491db, type: 3}
       propertyPath: target
       value: 
@@ -10917,10 +10888,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: 3746739582170337670, guid: 013ea538377fe2b4a85519523ff76ed7, type: 3}
-      propertyPath: parent
-      value: 
-      objectReference: {fileID: 2024434278}
     - target: {fileID: 6889927698402251166, guid: 013ea538377fe2b4a85519523ff76ed7, type: 3}
       propertyPath: m_Name
       value: RangedPickUp
@@ -10978,10 +10945,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4123244606851559177, guid: 708a2677ad956e045953e62334d816ac, type: 3}
-      propertyPath: parent
-      value: 
-      objectReference: {fileID: 2024434278}
     - target: {fileID: 6150318882036002577, guid: 708a2677ad956e045953e62334d816ac, type: 3}
       propertyPath: m_Name
       value: MeleePickUp

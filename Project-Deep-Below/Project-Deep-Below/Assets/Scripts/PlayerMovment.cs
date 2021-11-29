@@ -48,10 +48,7 @@ public class PlayerMovment : MonoBehaviour
             rolling = true;
             StartCoroutine(PlayerRoll());
         }
-        if (rolling)
-        {
-            controller.Move(move * stats.Roll * Time.deltaTime);
-        }
+        
         //Is sprint button pushed down
         speed = Input.GetButton("Sprint") && stats.Stamina > 0 ? stats.SprintSpeed : stats.BaseSpeed;
 
@@ -67,8 +64,22 @@ public class PlayerMovment : MonoBehaviour
             PlayerMove(move);
         }
         DrainStamina(move);
+        if (rolling)
+        {
+            Roll(move);
+        }
     }
+    private void Roll(Vector3 move)
+    {
+        if (cam.isActiveAndEnabled)
+        {
+            Vector3 moveX = cam.transform.right * move.x;
+            Vector3 moveZ = transform.forward * move.z;
 
+            move = (moveX + moveZ);
+        }
+        controller.Move(move * stats.Roll * Time.deltaTime);
+    }
     //Method used for moving the character controller
     private void PlayerMove(Vector3 _Speed)
     {

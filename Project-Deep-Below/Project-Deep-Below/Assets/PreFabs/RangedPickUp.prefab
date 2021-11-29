@@ -5020,7 +5020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5951aae9cd8318e43a18d3f5662b8929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
   location: {x: -3.82, y: 13.53, z: 3.26}
   rotation: {x: -70.717, y: 0, z: -108.323}
   melee: 0
@@ -5053,9 +5052,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 8587214317177585914, guid: 7248d311a02927a47949b7cabf014305, type: 3}
   muzzel: {fileID: 4792411624441304543}
-  speed: 5
-  clip: 50
-  attackRate: 0.1
+  speed: 20
+  clip: 6
+  attackRate: 1
   heavyAttackRate: 4
   reloadTime: 4
 --- !u!33 &6148357611355365466
@@ -5118,5 +5117,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}

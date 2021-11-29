@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private RuntimeAnimatorController shootingController;
+    [SerializeField] private RuntimeAnimatorController meleeController;
     [SerializeField] private RuntimeAnimatorController unarmedController;
     [Space] [Space]
     [SerializeField] private float stamina = 5;
@@ -36,12 +37,18 @@ public class PlayerStats : MonoBehaviour
     [Space] [Space]
     [SerializeField] private float levelUpStamina;
     [SerializeField] private int levelUpHealth;
+    [Space]
+    [SerializeField] private GameObject pickUpTarget;
 
     private void Update()
     {
         if(this.GetComponentInChildren<RangeCombat>())
         {
             animator.runtimeAnimatorController = shootingController;
+        }
+        else if(this.GetComponentInChildren<MeleeCombat>())
+        {
+            animator.runtimeAnimatorController = meleeController;
         }
         else
         {
@@ -53,6 +60,7 @@ public class PlayerStats : MonoBehaviour
     public void DamagePlayer(int _Damage)
     {
         health = health > 0 ? health -= _Damage : 0;
+        animator.SetTrigger("Damage");
 
         if(health <= 0)
         {
@@ -88,7 +96,7 @@ public class PlayerStats : MonoBehaviour
     //TODO
     private void Death()
     {
-
+        animator.SetTrigger("Death");
     }
 
     #region Properties
@@ -169,6 +177,10 @@ public class PlayerStats : MonoBehaviour
     public Animator Animation
     {
         get => animator;
+    }
+    public GameObject PickUpTarget
+    {
+        get => pickUpTarget;
     }
 
     #endregion
