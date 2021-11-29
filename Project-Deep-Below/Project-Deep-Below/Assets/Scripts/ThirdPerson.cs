@@ -13,6 +13,7 @@ public class ThirdPerson : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.Lerp(transform.position, target.position, (smoothedPosition * Time.deltaTime));
+        //transform.position = target.position;
         Quaternion rotation = (target.parent.gameObject.transform.rotation);
         transform.rotation = rotation;
     }

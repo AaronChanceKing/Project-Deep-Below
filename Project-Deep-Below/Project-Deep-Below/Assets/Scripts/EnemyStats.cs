@@ -3,6 +3,7 @@
 //Date: 11/23/21
 using System;
 using UnityEngine;
+using Pathfinding;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -23,10 +24,12 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private int level = 1;
     [SerializeField] private float baseExp;
     [SerializeField] private float expMultipliyer = 1;
+    [SerializeField] private Animator animator;
 
     public void Damage(int _Damage)
     {
         health = health > 0 ? health -= _Damage : 0;
+        animator.SetTrigger("Damage");
 
         if(health <= 0)
         {
@@ -47,7 +50,18 @@ public class EnemyStats : MonoBehaviour
     private void Death()
     {
         GameManager.Instance.PlayerStats.AddExp(GetEXP());
+        animator.SetTrigger("Death");
+        this.GetComponent<AIPath>().enabled = false;
+        this.GetComponent<CapsuleCollider>().enabled = false;
+        this.GetComponentInChildren<EnemyAttack>().enabled = false;
+        this.GetComponentInChildren<EnemyIdle>().enabled = false;
+        this.GetComponent<Rigidbody>().isKinematic = true;
 
+        Invoke("Destroy", 10f);
+    }
+
+    private void Destroy()
+    {
         Destroy(this.gameObject);
     }
 
@@ -105,6 +119,10 @@ public class EnemyStats : MonoBehaviour
         get => heavyAttackRate;
 
         set => heavyAttackRate = value;
+    }
+    public Animator Animation
+    {
+        get => animator;
     }
 
 }

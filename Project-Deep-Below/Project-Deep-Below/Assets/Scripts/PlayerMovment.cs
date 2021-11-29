@@ -92,6 +92,8 @@ public class PlayerMovment : MonoBehaviour
         {
             controller.Move(_Speed * Time.deltaTime * speed);
         }
+
+        animator.SetFloat("Speed", (Mathf.Abs(_Speed.x) + Mathf.Abs(_Speed.z)));
     }
 
     //Method to rotate the player in direction of the mouse

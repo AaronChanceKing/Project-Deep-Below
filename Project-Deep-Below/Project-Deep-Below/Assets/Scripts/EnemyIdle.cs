@@ -21,6 +21,7 @@ public class EnemyIdle : MonoBehaviour
         if(other.tag == "Player")
         {
             pathfinding.target = null;
+            this.GetComponentInParent<EnemyStats>().Animation.SetFloat("Speed", 0);
         }
     }
 }

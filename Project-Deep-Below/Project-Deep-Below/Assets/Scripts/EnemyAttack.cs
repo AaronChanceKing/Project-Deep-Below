@@ -15,7 +15,7 @@ public class EnemyAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyStats = this.GetComponent<EnemyStats>();
+        enemyStats = this.GetComponentInParent<EnemyStats>();
     }
 
     // Update is called once per frame
@@ -24,6 +24,12 @@ public class EnemyAttack : MonoBehaviour
         if (state.reachedDestination && pathfinding.target != null)
         {
             Attack((int)UnityEngine.Random.Range(.5f, 1.6f), enemyStats.Ranged);
+
+            enemyStats.Animation.SetFloat("Speed", 0);
+        }
+        else if(!state.reachedDestination && pathfinding.target != null)
+        {
+            enemyStats.Animation.SetFloat("Speed", 1);
         }
     }
     private void Attack(int _AttackChoice, bool Ranged)
@@ -64,11 +70,19 @@ public class EnemyAttack : MonoBehaviour
     {
         if(_AttackChoice == 1)
         {
-            GameManager.Instance.PlayerStats.DamagePlayer(enemyStats.EnemyBaseDamage);
+            //Damage(enemyStats.EnemyBaseDamage);
+            enemyStats.Animation.SetInteger("AttackDamage", 1);
         }
         else if(_AttackChoice == 2)
         {
-            GameManager.Instance.PlayerStats.DamagePlayer(enemyStats.EnemyHeavyDamage);
+            //Damage(enemyStats.EnemyHeavyDamage);
+            enemyStats.Animation.SetInteger("AttackDamage", 2);
         }
+        enemyStats.Animation.SetTrigger("Attack");
+    }
+
+    public void Damage(int _Damage)
+    {
+        GameManager.Instance.PlayerStats.DamagePlayer(_Damage);
     }
 }

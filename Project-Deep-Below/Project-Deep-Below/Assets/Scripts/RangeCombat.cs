@@ -83,6 +83,7 @@ public class RangeCombat : MonoBehaviour
     private void Reload()
     {
         clip = clipMax;
+        GameManager.Instance.PlayerStats.Animation.SetTrigger("Reload");
     }
 
     public int Clip
