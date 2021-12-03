@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class DoNotDestroy : MonoBehaviour
 {
-    private static DoNotDestroy instance;
+    private GameObject instance;
 
     private void Awake()
     {
         if (instance == null)
         {
-            instance = this;
+            instance = this.gameObject;
             DontDestroyOnLoad(this.gameObject);
         }
         else if (instance != this)

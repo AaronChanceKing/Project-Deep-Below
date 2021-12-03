@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     private void SetPlayer()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerStats = player.GetComponent<PlayerStats>();
+        playerStats = PlayerStats.Instance;
     }
 
     //Rescan the enemys walkable area

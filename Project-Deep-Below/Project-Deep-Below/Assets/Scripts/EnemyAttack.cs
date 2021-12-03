@@ -23,7 +23,14 @@ public class EnemyAttack : MonoBehaviour
     {
         if (state.reachedDestination && pathfinding.target != null)
         {
-            Attack((int)UnityEngine.Random.Range(.5f, 1.6f), enemyStats.Ranged);
+            if(PlayerStats.Instance.Health <= 0)
+            {
+
+            }
+            else
+            {
+                Attack((int)UnityEngine.Random.Range(.5f, 1.6f), enemyStats.Ranged);
+            }
 
             enemyStats.Animation.SetFloat("Speed", 0);
         }

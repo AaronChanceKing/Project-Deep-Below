@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Boarder
   - 2D
+  - SecondCam
   layers:
   - Default
   - TransparentFX

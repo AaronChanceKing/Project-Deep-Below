@@ -7,6 +7,7 @@ using System;
 
 public class PlayerStats : MonoBehaviour
 {
+    private static PlayerStats instance;
     [SerializeField] private Animator animator;
     [SerializeField] private RuntimeAnimatorController shootingController;
     [SerializeField] private RuntimeAnimatorController meleeController;
@@ -31,14 +32,31 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int heavyDamage;
     [SerializeField] private bool penetrateDamage;
     [Space] [Space]
-    private int playerLevel = 1;
-    private float playerEXP = 0;
-    private float playerEXPMultipliyer = 100;
+    [SerializeField] private int playerLevel = 1;
+    [SerializeField] private float playerEXP = 0;
+    [SerializeField] private float playerEXPMultipliyer = 100;
     [Space] [Space]
     [SerializeField] private float levelUpStamina;
     [SerializeField] private int levelUpHealth;
     [Space]
     [SerializeField] private GameObject pickUpTarget;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+    public static PlayerStats Instance
+    {
+        get => instance;
+    }
 
     private void Update()
     {
@@ -59,12 +77,15 @@ public class PlayerStats : MonoBehaviour
     //Takes in INT
     public void DamagePlayer(int _Damage)
     {
-        health = health > 0 ? health -= _Damage : 0;
-        animator.SetTrigger("Damage");
-
-        if(health <= 0)
+        if (health > 0)
         {
-            Death();
+            health = health > 0 ? health -= _Damage : 0;
+            animator.SetTrigger("Damage");
+
+            if (health <= 0)
+            {
+                Death();
+            }
         }
     }
     //Heal the player
@@ -97,6 +118,10 @@ public class PlayerStats : MonoBehaviour
     private void Death()
     {
         animator.SetTrigger("Death");
+        this.GetComponent<PlayerMovment>().enabled = false;
+        this.GetComponent<CharacterController>().enabled = false;
+
+
     }
 
     #region Properties

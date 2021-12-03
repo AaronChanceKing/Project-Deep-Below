@@ -27,7 +27,7 @@ public class PlayerMovment : MonoBehaviour
         //Get access to character controller
         controller = this.GetComponent<CharacterController>();
         //Get access to player stats
-        stats = this.GetComponent<PlayerStats>();
+        stats = PlayerStats.Instance;
 
         //TODO
         animator = GetComponentInChildren<Animator>();
