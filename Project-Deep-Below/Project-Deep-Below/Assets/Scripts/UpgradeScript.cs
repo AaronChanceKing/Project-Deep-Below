@@ -1,3 +1,6 @@
+//Script to upgrade the player stats 
+//Creater: King
+//Date: 12/1/21
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -10,13 +10,7 @@ public class UI : MonoBehaviour
     [SerializeField] Image health;
     [SerializeField] GameObject ammo;
     [SerializeField] Text ammoCount;
-    [SerializeField] GameObject reticle;
-    private Camera cam;
 
-    private void Start()
-    {
-        cam = GameObject.FindGameObjectWithTag("SecondCam").GetComponent<Camera>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -30,14 +24,6 @@ public class UI : MonoBehaviour
                 GameManager.Instance.Player.GetComponentInChildren<RangeCombat>().Clip.ToString() 
                 + " / " +
                 GameManager.Instance.Player.GetComponentInChildren<RangeCombat>().ClipMax.ToString();
-            if(cam.isActiveAndEnabled)
-            {
-                reticle.SetActive(true);
-            }
-            else
-            {
-                reticle.SetActive(false);
-            }
         }
         else
         {

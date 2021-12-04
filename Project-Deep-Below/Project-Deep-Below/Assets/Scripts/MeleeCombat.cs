@@ -22,7 +22,7 @@ public class MeleeCombat : MonoBehaviour
     {
         enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
         //Delay for base attack
-        if(Time.time >= attackBuffer && Input.GetButtonDown("Fire1"))
+        if(Time.time >= attackBuffer && Input.GetButton("Fire1"))
         {
             Attack(1);
             GameManager.Instance.PlayerStats.Animation.SetInteger("AttackDamage", 1);
@@ -43,16 +43,30 @@ public class MeleeCombat : MonoBehaviour
         {
             if(_AttackChoice == 1)
             {
-                damage = (int)((float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.BaseDamage), 1) * 10);
+                damage = (int)((float)Math.Round((UnityEngine.Random.Range(1.0f, 2.0f) * GameManager.Instance.PlayerStats.BaseDamage), 1) * 10);
             }
             else if(_AttackChoice == 2)
             {
-                damage = (int)((float)Math.Round((UnityEngine.Random.Range(1.00f, 2.00f) * GameManager.Instance.PlayerStats.HeavyDamage), 1) * 10);
+                damage = (int)((float)Math.Round((UnityEngine.Random.Range(1.5f, 2.0f) * GameManager.Instance.PlayerStats.HeavyDamage), 1) * 10);
             }
+        }
+        GameManager.Instance.PlayerStats.Animation.SetTrigger("Attack");
+    }
 
+    public void LightAttack()
+    {
+        foreach (Collider enemy in enemiesHit)
+        {
             enemy.GetComponent<EnemyStats>().Damage(damage);
             Debug.Log(enemy.name + " hit for " + damage);
         }
-        GameManager.Instance.PlayerStats.Animation.SetTrigger("Attack");
+    }
+    public void HeavyAttack()
+    {
+        foreach (Collider enemy in enemiesHit)
+        {
+            enemy.GetComponent<EnemyStats>().Damage(damage);
+            Debug.Log(enemy.name + " hit for " + damage);
+        }
     }
 }

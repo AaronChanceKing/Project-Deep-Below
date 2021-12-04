@@ -165,9 +165,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 2.5
-  pickNextWaypointDist: 0.7
-  endReachedDistance: 0.7
+  slowdownDistance: 2
+  pickNextWaypointDist: 0.5
+  endReachedDistance: 0.5
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 0
   whenCloseToDestination: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c028ed5f07660e244906c6012a986071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 150
   baseDamage: 1
   heavyDamage: 2
   ranged: 0
@@ -404,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 73df61e716785a645a852a88efc3a556, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.564
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 73df61e716785a645a852a88efc3a556, type: 3}
       propertyPath: m_LocalRotation.w

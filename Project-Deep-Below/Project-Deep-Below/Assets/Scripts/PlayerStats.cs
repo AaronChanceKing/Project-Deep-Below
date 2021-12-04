@@ -24,7 +24,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float sprintSpeed = 16f;
     [Space] [Space]
     [SerializeField] private float rollSpeed;
-    [Range (.05f, .30f)]
     [SerializeField] private float rollDistance;
     [SerializeField] private float rollRate = 1f;
     [Space] [Space]
@@ -120,8 +119,15 @@ public class PlayerStats : MonoBehaviour
         animator.SetTrigger("Death");
         this.GetComponent<PlayerMovment>().enabled = false;
         this.GetComponent<CharacterController>().enabled = false;
-
-
+        this.GetComponent<PlayerInventory>().enabled = false;
+        if(this.GetComponentInChildren<MeleeCombat>())
+        {
+            this.GetComponentInChildren<MeleeCombat>().enabled = false;
+        }
+        else if(this.GetComponentInChildren<RangeCombat>())
+        {
+            this.GetComponentInChildren<RangeCombat>().enabled = false;
+        }
     }
 
     #region Properties
@@ -203,6 +209,7 @@ public class PlayerStats : MonoBehaviour
     {
         get => animator;
     }
+    //Returns the location to parent weapons to
     public GameObject PickUpTarget
     {
         get => pickUpTarget;

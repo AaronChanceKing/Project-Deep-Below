@@ -11,7 +11,6 @@ public class PlayerMovment : MonoBehaviour
     //To Add Later
     private Animator animator;
     //private AudioSource audioSorce;
-    [SerializeField] private Camera cam;
 
     //For movment
     private CharacterController controller;
@@ -20,6 +19,7 @@ public class PlayerMovment : MonoBehaviour
 
     float rollBuffer = 0f;
     bool rolling = false;
+    Vector3 roll;
 
     // Start is called before the first frame update
     void Start()
@@ -46,39 +46,25 @@ public class PlayerMovment : MonoBehaviour
         {
             rollBuffer = Time.time + stats.RollRate;
             rolling = true;
+            roll = move;
             StartCoroutine(PlayerRoll());
         }
         
         //Is sprint button pushed down
         speed = Input.GetButton("Sprint") && stats.Stamina > 0 ? stats.SprintSpeed : stats.BaseSpeed;
 
-        //Move thoes inputs to outside methods
-        if(cam.isActiveAndEnabled)
-        {
-            PlayerDirectionThird(mousePosition);
-            PlayerMoveThird(move);
-        }
-        else
-        {
-            PlayerDirection(mousePosition);
-            PlayerMove(move);
-        }
+        PlayerDirection(mousePosition);
+        PlayerMove(move);
+        
         DrainStamina(move);
         if (rolling)
         {
-            Roll(move);
+            Roll();
         }
     }
-    private void Roll(Vector3 move)
+    private void Roll()
     {
-        if (cam.isActiveAndEnabled)
-        {
-            Vector3 moveX = cam.transform.right * move.x;
-            Vector3 moveZ = transform.forward * move.z;
-
-            move = (moveX + moveZ);
-        }
-        controller.Move(move * stats.Roll * Time.deltaTime);
+        controller.Move(roll * stats.Roll * Time.deltaTime);
     }
     //Method used for moving the character controller
     private void PlayerMove(Vector3 _Speed)
@@ -91,22 +77,6 @@ public class PlayerMovment : MonoBehaviour
         animator.SetFloat("Speed", (Mathf.Abs(_Speed.x) + Mathf.Abs(_Speed.z)));
         
     }
-    //Method for 3rd person movment
-    private void PlayerMoveThird(Vector3 _Speed)
-    {
-        Vector3 moveX = cam.transform.right * _Speed.x;
-        Vector3 moveZ = transform.forward * _Speed.z;
-
-        _Speed = (moveX + moveZ);
-
-        if (_Speed.magnitude >= .1f)
-        {
-            controller.Move(_Speed * Time.deltaTime * speed);
-        }
-
-        animator.SetFloat("Speed", (Mathf.Abs(_Speed.x) + Mathf.Abs(_Speed.z)));
-    }
-
     //Method to rotate the player in direction of the mouse
     private void PlayerDirection(Vector3 _MousePosition)
     {
@@ -121,16 +91,12 @@ public class PlayerMovment : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
     }
 
-    private void PlayerDirectionThird(Vector3 _MousePosition)
-    {
-        transform.rotation = Quaternion.Euler(new Vector3(0, _MousePosition.x, 0));
-    }
-
     IEnumerator PlayerRoll()
     {
+        animator.SetBool("Roll", rolling);
         yield return new WaitForSeconds(stats.RollDistance);
-
         rolling = false;
+        animator.SetBool("Roll", rolling);
     }
 
     private void DrainStamina(Vector3 _Speed)

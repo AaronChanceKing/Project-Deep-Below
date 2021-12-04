@@ -4,6 +4,7 @@
 using System;
 using UnityEngine;
 using Pathfinding;
+using System.Collections;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -26,6 +27,16 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private float expMultipliyer = 1;
     [SerializeField] private Animator animator;
 
+    private void Start()
+    {
+        StartCoroutine(LateStart());
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(.1f);
+        Physics.IgnoreCollision(this.GetComponent<CapsuleCollider>(), GameManager.Instance.Player.GetComponent<CharacterController>(), true);
+    }
     public void Damage(int _Damage)
     {
         health = health > 0 ? health -= _Damage : 0;
