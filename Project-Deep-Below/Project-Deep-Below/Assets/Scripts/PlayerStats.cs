@@ -9,8 +9,6 @@ public class PlayerStats : MonoBehaviour
 {
     private static PlayerStats instance;
     [SerializeField] private Animator animator;
-    [SerializeField] private RuntimeAnimatorController shootingController;
-    [SerializeField] private RuntimeAnimatorController meleeController;
     [SerializeField] private RuntimeAnimatorController unarmedController;
     [Space] [Space]
     [SerializeField] private float stamina = 5;
@@ -57,21 +55,6 @@ public class PlayerStats : MonoBehaviour
         get => instance;
     }
 
-    private void Update()
-    {
-        if(this.GetComponentInChildren<RangeCombat>())
-        {
-            animator.runtimeAnimatorController = shootingController;
-        }
-        else if(this.GetComponentInChildren<MeleeCombat>())
-        {
-            animator.runtimeAnimatorController = meleeController;
-        }
-        else
-        {
-            animator.runtimeAnimatorController = unarmedController;
-        }
-    }
     //Damage the player
     //Takes in INT
     public void DamagePlayer(int _Damage)
@@ -208,6 +191,12 @@ public class PlayerStats : MonoBehaviour
     public Animator Animation
     {
         get => animator;
+        set => animator = value;
+    }
+    //Returns unarmed animator
+    public RuntimeAnimatorController Unarmed
+    {
+        get => unarmedController;
     }
     //Returns the location to parent weapons to
     public GameObject PickUpTarget

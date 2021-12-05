@@ -8,7 +8,7 @@ public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private List<GameObject> inventory = new List<GameObject>();
     [SerializeField] int inventoryMax = 2;
-    [SerializeField] GameObject currentWeapon;
+    [SerializeField] GameObject currentWeapon = null;
     private Object[] preFabs;
     private int currentInventory = 0;
 
@@ -21,7 +21,6 @@ public class PlayerInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetCurrentWeapon();
         float scrollWheel = Input.GetAxis("Swap");
 
         if (Input.GetButtonDown("Drop") && currentWeapon != null)
@@ -36,23 +35,6 @@ public class PlayerInventory : MonoBehaviour
         else if(scrollWheel <= -1)
         {
             Equip(-1);
-        }
-    }
-
-    //Get the current weapon equiped
-    private void GetCurrentWeapon()
-    {
-        if (this.GetComponentInChildren<MeleeCombat>())
-        {
-            currentWeapon = this.gameObject.GetComponentInChildren<MeleeCombat>().gameObject;
-        }
-        else if(this.GetComponentInChildren<RangeCombat>())
-        {
-            currentWeapon = this.gameObject.GetComponentInChildren<RangeCombat>().gameObject;
-        }
-        else
-        {
-            currentWeapon = null;
         }
     }
     //Drop equiped weapon
@@ -71,7 +53,7 @@ public class PlayerInventory : MonoBehaviour
                 if(weapon.name == _WeaponName)
                 {
                     inventory.Add(weapon);
-                    if(weapon.GetComponent<RangeCombat>())
+                    if(weapon.tag == "Ranged")
                     {
                         RangeCombat set = weapon.GetComponent<RangeCombat>();
                         AmmoManager.Instance.AddGun(weapon.name, set.Clip, set.AmmoCount, set.ClipMax);
@@ -92,7 +74,7 @@ public class PlayerInventory : MonoBehaviour
             if(weapon.name == _weapon.name)
             {
 
-                if (weapon.GetComponent<RangeCombat>())
+                if (weapon.tag == "Ranged")
                 {
                     AmmoManager.Instance.RemoveGun(weapon.name);
                 }
@@ -116,7 +98,7 @@ public class PlayerInventory : MonoBehaviour
                 if(inventory.Count > (currentInventory + _InventoryNumber))
                 {
                     currentInventory++;
-                    if(currentWeapon.GetComponent<RangeCombat>())
+                    if(currentWeapon.tag == "Ranged")
                     {
                         SetAmmo();
                     }
@@ -127,12 +109,15 @@ public class PlayerInventory : MonoBehaviour
                 if(currentInventory > 0)
                 {
                     currentInventory--;
-                    if (currentWeapon.GetComponent<RangeCombat>())
+                    if (currentWeapon.tag == "Ranged")
                     {
                         SetAmmo();
                     }
                     SetWeapon();
                 }
+                break;
+            default:
+                PlayerStats.Instance.Animation.runtimeAnimatorController = PlayerStats.Instance.Unarmed; 
                 break;
         }
     }
@@ -140,10 +125,11 @@ public class PlayerInventory : MonoBehaviour
     {
         Destroy(currentWeapon);
         GameObject item = Instantiate(inventory[currentInventory]);
+        currentWeapon = item;
         item.name = inventory[currentInventory].name;
         item.transform.localScale = new Vector3(1, 1, 1);
 
-        if(item.GetComponent<RangeCombat>())
+        if(item.tag == "Ranged")
         {
             int[] ammo = AmmoManager.Instance.FindGun(item.name);
             RangeCombat set = item.GetComponent<RangeCombat>();

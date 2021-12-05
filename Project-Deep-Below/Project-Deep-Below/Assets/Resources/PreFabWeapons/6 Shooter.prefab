@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 5136627070249618464}
   m_Layer: 9
   m_Name: 6 Shooter
-  m_TagString: PickUp
+  m_TagString: Ranged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,7 +80,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   location: {x: -3.82, y: 13.53, z: 3.26}
   rotation: {x: -70.717, y: 0, z: -108.323}
-  melee: 0
 --- !u!114 &3552809299733252905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb49447a3677a7d4597d1ab40bcc6134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 9100000, guid: fa5d32ee7d8ea1641a792b64ffc7cc2a, type: 2}
   bullet: {fileID: 8587214317177585914, guid: 7248d311a02927a47949b7cabf014305, type: 3}
   muzzel: {fileID: 4792411624441304543}
   speed: 20

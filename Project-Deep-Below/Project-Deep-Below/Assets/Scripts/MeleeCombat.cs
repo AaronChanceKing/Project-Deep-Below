@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class MeleeCombat : MonoBehaviour
 {
+    [SerializeField] private RuntimeAnimatorController animator;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Collider[] enemiesHit;
 
@@ -18,6 +19,10 @@ public class MeleeCombat : MonoBehaviour
 
     private int damage = 0;
 
+    private void Start()
+    {
+        PlayerStats.Instance.Animation.runtimeAnimatorController = animator;
+    }
     private void Update()
     {
         enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);

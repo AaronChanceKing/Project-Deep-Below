@@ -7,12 +7,13 @@ using System;
 
 public class RangeCombat : MonoBehaviour
 {
+    [SerializeField] private RuntimeAnimatorController animator;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject muzzel;
     [SerializeField] float speed;
     [SerializeField] int ammoCount;
     [SerializeField] int clip;
-    private int clipMax;
+    private int clipMax = 999999;
     [SerializeField] float attackRate = 1.0f;
     [SerializeField] float heavyAttackRate = 4.0f;
     [SerializeField] float reloadTime = 4.0f;
@@ -21,7 +22,11 @@ public class RangeCombat : MonoBehaviour
 
     private void Start()
     {
-        clipMax = clip;
+        if(clipMax == 999999)
+        {
+            clipMax = clip;
+        }
+        PlayerStats.Instance.Animation.runtimeAnimatorController = animator;
     }
     private void Update()
     {
