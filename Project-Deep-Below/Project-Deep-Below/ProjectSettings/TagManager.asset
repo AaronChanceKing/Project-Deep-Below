@@ -10,6 +10,8 @@ TagManager:
   - Boarder
   - 2D
   - SecondCam
+  - Ranged
+  - Melee
   layers:
   - Default
   - TransparentFX

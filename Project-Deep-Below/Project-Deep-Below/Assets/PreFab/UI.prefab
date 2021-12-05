@@ -734,6 +734,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b913510b44330034ba32e433660b7e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HUD: {fileID: 5777322321017185480}
+  Bag: {fileID: 5777322321914912380}
+  Pause: {fileID: 5777322322706485055}
+  Death: {fileID: 5777322320641457691}
   health: {fileID: 5777322321353983760}
   ammo: {fileID: 1565139970}
   ammoCount: {fileID: 201196326}
