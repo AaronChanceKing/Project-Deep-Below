@@ -59,7 +59,6 @@ public class PlayerInventory : MonoBehaviour
     private void DropWeapon()
     {
         RemoveFromInventory(currentWeapon);
-        Destroy(currentWeapon);
         Equip(0);
     }
     //Add item to inventory
@@ -72,6 +71,11 @@ public class PlayerInventory : MonoBehaviour
                 if(weapon.name == _WeaponName)
                 {
                     inventory.Add(weapon);
+                    if(weapon.GetComponent<RangeCombat>())
+                    {
+                        RangeCombat set = weapon.GetComponent<RangeCombat>();
+                        AmmoManager.Instance.AddGun(weapon.name, set.Clip, set.AmmoCount, set.ClipMax);
+                    }
                 }
             }
         }
@@ -87,6 +91,11 @@ public class PlayerInventory : MonoBehaviour
         {
             if(weapon.name == _weapon.name)
             {
+
+                if (weapon.GetComponent<RangeCombat>())
+                {
+                    AmmoManager.Instance.RemoveGun(weapon.name);
+                }
                 inventory.Remove(weapon);
                 currentInventory = 0;
             }
@@ -100,31 +109,54 @@ public class PlayerInventory : MonoBehaviour
             case 0:
                 if (inventory.Count > _InventoryNumber)
                 {
-                    GameObject item = Instantiate(inventory[currentInventory]);
-                    item.name = inventory[currentInventory].name;
-                    item.transform.localScale = new Vector3(1, 1, 1);
+                    SetWeapon();
                 }
                 break;
             case 1:
                 if(inventory.Count > (currentInventory + _InventoryNumber))
                 {
-                    Destroy(currentWeapon);
                     currentInventory++;
-                    GameObject item = Instantiate(inventory[currentInventory]);
-                    item.name = inventory[currentInventory].name;
-                    item.transform.localScale = new Vector3(1, 1, 1);
+                    if(currentWeapon.GetComponent<RangeCombat>())
+                    {
+                        SetAmmo();
+                    }
+                    SetWeapon();
                 }
                 break;
             case -1:
                 if(currentInventory > 0)
                 {
-                    Destroy(currentWeapon);
                     currentInventory--;
-                    GameObject item = Instantiate(inventory[currentInventory]);
-                    item.name = inventory[currentInventory].name;
-                    item.transform.localScale = new Vector3(1, 1, 1);
+                    if (currentWeapon.GetComponent<RangeCombat>())
+                    {
+                        SetAmmo();
+                    }
+                    SetWeapon();
                 }
                 break;
         }
+    }
+    private void SetWeapon()
+    {
+        Destroy(currentWeapon);
+        GameObject item = Instantiate(inventory[currentInventory]);
+        item.name = inventory[currentInventory].name;
+        item.transform.localScale = new Vector3(1, 1, 1);
+
+        if(item.GetComponent<RangeCombat>())
+        {
+            int[] ammo = AmmoManager.Instance.FindGun(item.name);
+            RangeCombat set = item.GetComponent<RangeCombat>();
+
+            set.Clip = ammo[0];
+            set.AmmoCount = ammo[1];
+            set.ClipMax = ammo[2];
+        }
+    }
+    private void SetAmmo()
+    {
+        RangeCombat set = currentWeapon.GetComponent<RangeCombat>();
+
+        AmmoManager.Instance.AddGun(currentWeapon.name, set.Clip, set.AmmoCount, set.ClipMax);
     }
 }

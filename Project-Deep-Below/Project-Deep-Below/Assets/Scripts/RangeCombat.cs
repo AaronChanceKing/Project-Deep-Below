@@ -92,9 +92,16 @@ public class RangeCombat : MonoBehaviour
     public int Clip
     {
         get => clip;
+        set => clip = value;
+    }
+    public int AmmoCount
+    {
+        get => ammoCount;
+        set => ammoCount = value;
     }
     public int ClipMax
     {
-        get => ammoCount;
+        get => clipMax;
+        set => clipMax = value;
     }
 }

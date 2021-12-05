@@ -23,7 +23,7 @@ public class UI : MonoBehaviour
             ammoCount.text =
                 GameManager.Instance.Player.GetComponentInChildren<RangeCombat>().Clip.ToString() 
                 + " / " +
-                GameManager.Instance.Player.GetComponentInChildren<RangeCombat>().ClipMax.ToString();
+                GameManager.Instance.Player.GetComponentInChildren<RangeCombat>().AmmoCount.ToString();
         }
         else
         {
