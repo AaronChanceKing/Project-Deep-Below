@@ -1,4 +1,4 @@
-//Pick Up logic
+//Logic for picking up weapons
 //Creater: King
 //Date: 11/22/21
 
@@ -10,13 +10,14 @@ public class PickUp : MonoBehaviour
     {
         if(_other.tag == "Player")
         {
-            AddToInventory();
+            Add();
+            //Not really adding this instance of the object as it is a dummy item
             Destroy(this.gameObject);
         }
     }
 
     //Add item to player inventory and equip it if no weapon is active
-    private void AddToInventory()
+    private void Add()
     {
         GameManager.Instance.Player.GetComponent<PlayerInventory>().AddToInventory(this.gameObject.name);
     }

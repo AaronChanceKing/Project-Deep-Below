@@ -5,14 +5,23 @@ using UnityEngine;
 
 public class ChangeWeapon : MonoBehaviour
 {
+    /// <summary>
+    /// Location in relation to parent to allow the it to be positioned correctly
+    /// </summary>
     [SerializeField] private Vector3 location;
+
+    /// <summary>
+    /// Rotation in relation to parent to allow the it to be positioned correctly
+    /// </summary>
     [SerializeField] private Vector3 rotation;
+
     // Start is called before the first frame update
     void Start()
     {
         AddItem();
     }
 
+    //Add the item to the player component
     private void AddItem()
     {
         this.GetComponent<UpgradeScript>().UpgradePlayer(GameManager.Instance.Player);

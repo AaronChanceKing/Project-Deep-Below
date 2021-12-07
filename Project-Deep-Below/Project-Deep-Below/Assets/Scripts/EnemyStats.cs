@@ -8,6 +8,7 @@ using System.Collections;
 
 public class EnemyStats : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private float health;
     [Space]
     [Space]
@@ -26,17 +27,24 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private float baseExp;
     [SerializeField] private float expMultipliyer = 1;
     [SerializeField] private Animator animator;
+    #endregion
 
     private void Start()
     {
         StartCoroutine(LateStart());
     }
 
+    //Allows for method to be called after start and only once
     IEnumerator LateStart()
     {
         yield return new WaitForSeconds(.1f);
+        //This is currently what is keeping the player collider from causeing the enemy to spin off into the distance
         Physics.IgnoreCollision(this.GetComponent<CapsuleCollider>(), GameManager.Instance.Player.GetComponent<CharacterController>(), true);
     }
+    /// <summary>
+    /// Method that will damage the enemy that the script is attacked to
+    /// </summary>
+    /// <param name="_Damage">The amount of damage to deal to the target</param>
     public void Damage(int _Damage)
     {
         health = health > 0 ? health -= _Damage : 0;
@@ -48,6 +56,7 @@ public class EnemyStats : MonoBehaviour
         }
     }
 
+    //Helper mehtod to get the amount of exp to reward the player
     private float GetEXP()
     {
         if(level > 1)
@@ -58,6 +67,8 @@ public class EnemyStats : MonoBehaviour
         return baseExp * expMultipliyer;
     }
 
+    //Disable components on the enemy upon death
+    //Small wait timer for effect before compleately destroying
     private void Death()
     {
         GameManager.Instance.PlayerStats.AddExp(GetEXP());
@@ -71,69 +82,99 @@ public class EnemyStats : MonoBehaviour
         Invoke("Destroy", 10f);
     }
 
+    //Just a destroy method to allow Invoke method to be used
     private void Destroy()
     {
         Destroy(this.gameObject);
     }
 
-    //Sets the enemy base damage INT
-    //Returns the current damage of the enemy INT
+    #region Properties
+    /// <summary>
+    ///Sets the enemy base damage INT
+    ///<para>Returns the current damage of the enemy INT</para>
+    /// </summary>
     public int EnemyBaseDamage
     {
         get => baseDamage;
 
         set => baseDamage = value;
     }
-    //Sets the enemy heavy damage INT
-    //Returns the current heavy damage of the enemy INT
+    /// <summary>
+    ///Sets the enemy heavy damage INT
+    ///<para>Returns the current heavy damage of the enemy INT</para>
+    /// </summary>
     public int EnemyHeavyDamage
     {
         get => heavyDamage;
 
         set => heavyDamage = value;
     }
-    //Sets if the enemy is ranged
-    //Retruns if the enemy is ranged
+    /// <summary>
+    ///Set to if the enemy is ranged or melee
+    ///<para>Returns the current attack type BOOL</para>
+    /// </summary>
     public bool Ranged
     {
         get => ranged;
 
         set => ranged = value;
     }
-
+    /// <summary>
+    /// Set the range of attack melee only
+    /// <para>Returns the range of attack</para>
+    /// </summary>
     public float AttackRange
     {
         get => attackRange;
 
         set => attackRange = value;
     }
+    /// <summary>
+    /// Set the base attack timing
+    /// <para>Returns the current timming of the base attack</para>
+    /// </summary>
     public float BaseAttackBuffer
     {
         get => attackBuffer;
 
         set => attackBuffer = value;
     }
+    /// <summary>
+    /// Set the base attack rate
+    /// <para>Returns the current rate of the base attack</para>
+    /// </summary>
     public float BaseAttackRate
     {
         get => attackRate;
 
         set => attackRate = value;
     }
+    /// <summary>
+    /// Set the heavy attack timing
+    /// <para>Returns the current timming of the heavy attack</para>
+    /// </summary>
     public float HeavyAttackBuffer
     {
         get => heavyAttackBuffer;
 
         set => heavyAttackBuffer = value;
     }
+    /// <summary>
+    /// Set the base attack rate
+    /// <para>Returns the current rate of the base attack</para>
+    /// </summary>
     public float HeavyAttackRate
     {
         get => heavyAttackRate;
 
         set => heavyAttackRate = value;
     }
+    /// <summary>
+    /// Returns the animator attached to this game object
+    /// </summary>
     public Animator Animation
     {
         get => animator;
     }
-
+    #endregion
 }

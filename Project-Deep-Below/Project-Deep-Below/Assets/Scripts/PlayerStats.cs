@@ -7,19 +7,15 @@ using System;
 
 public class PlayerStats : MonoBehaviour
 {
+    #region Variables
     private static PlayerStats instance;
     [SerializeField] private Animator animator;
     [SerializeField] private RuntimeAnimatorController unarmedController;
-    [Space] [Space]
-    [SerializeField] private float stamina = 5;
-    [SerializeField] private float maxStamina = 5;
-    [SerializeField] private float staminaDrain = .01f;
     [Space] [Space]
     [SerializeField] private int health;
     [SerializeField] private int maxHealth;
     [Space] [Space]
     [SerializeField] private float baseSpeed = 10f;
-    [SerializeField] private float sprintSpeed = 16f;
     [Space] [Space]
     [SerializeField] private float rollSpeed;
     [SerializeField] private float rollDistance;
@@ -33,10 +29,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float playerEXP = 0;
     [SerializeField] private float playerEXPMultipliyer = 100;
     [Space] [Space]
-    [SerializeField] private float levelUpStamina;
     [SerializeField] private int levelUpHealth;
     [Space]
     [SerializeField] private GameObject pickUpTarget;
+    #endregion
 
     private void Awake()
     {
@@ -55,8 +51,10 @@ public class PlayerStats : MonoBehaviour
         get => instance;
     }
 
-    //Damage the player
-    //Takes in INT
+    /// <summary>
+    /// Method that will damage the player
+    /// </summary>
+    /// <param name="_Damage">The amount of damage to deal in INT</param>
     public void DamagePlayer(int _Damage)
     {
         if (health > 0)
@@ -70,14 +68,20 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
-    //Heal the player
-    //Takes in INT
+    /// <summary>
+    /// Method to easily heal the player
+    /// <para>Will not allow for the player to go above max health</para>
+    /// </summary>
+    /// <param name="_Health">The amount of health to return to player</param>
     public void HealPlayer(int _Health)
     {
         health = (health + _Health) <= maxHealth ? health = +_Health : maxHealth;
     }
-    //Add experience to the player
-    //Takes in FLOAT
+    /// <summary>
+    /// Add experience points to the player
+    /// <para>Will also call the level up Method if experiecne is greater than level requirment</para>
+    /// </summary>
+    /// <param name="_Exp">Amount of EXP to add in FLOAT</param>
     public void AddExp(float _Exp)
     {
         playerEXP += _Exp;
@@ -91,12 +95,15 @@ public class PlayerStats : MonoBehaviour
     private void LevelUp()
     {
         playerLevel++;
+        //increase the EXP* to make the next level harder
         playerEXPMultipliyer = (float)Math.Round(playerEXPMultipliyer * 1.2f, 2);
 
+        //TODO
+        //Will change this in the future to allow for more varied experience
+        //Possibly give the player a choose of what stat to upgrade
         maxHealth += levelUpHealth;
-        maxStamina += levelUpStamina;
     }
-    //TODO
+    //Diable the compopnents on the player
     private void Death()
     {
         animator.SetTrigger("Death");
@@ -114,75 +121,72 @@ public class PlayerStats : MonoBehaviour
     }
 
     #region Properties
-    //Retruns float for base speed
+    /// <summary>
+    /// Returns the base speed of player
+    /// </summary>
+    // Note only called base due to past experement with sprinting
     public float BaseSpeed
     {
         get => baseSpeed;
     }
-    //Returns float for sprint speed
-    public float SprintSpeed
-    {
-        get => sprintSpeed;
-    }
-    //Returns the stamina of player
-    public float Stamina
-    {
-        get => stamina;
-        set => stamina = value;
-    }
-    public float MaxStamina
-    {
-        get => maxStamina;
-    }
-    //Returns the stamina drain of the player
-    public float StaminaDrain
-    {
-        get => staminaDrain;
-    }
-    //Returns the base damage of player
-    //Allows setting of player damage
+    /// <summary>
+    /// Returns the base damage of player
+    /// <para>Allows setting of base damage</para>
+    /// </summary>
     public int BaseDamage
     {
         get => baseDamage;
         set => baseDamage = value;
     }
-    //Returns the heavy damage of player
-    //Allows setting of player heavy damage
+    /// <summary>
+    /// Returns the heavy damage of player
+    /// <para>Allows setting of heavy damage</para>
+    /// </summary>
     public int HeavyDamage
     {
         get => heavyDamage;
         set => heavyDamage = value;
     }
-    //Returns player health
-    //Allows setting of player health
+    /// <summary>
+    /// Returns and sets the health of the player
+    /// </summary>
     public int Health
     {
         get => health;
         set => health = value;
     }
-    //Returns player max health
-    //Allows setting of player max health
+    /// <summary>
+    /// Returns the max health of the player
+    /// </summary>
     public int MaxHealth
     {
         get => maxHealth;
     }
-    //Set if player damage will penetrate enemys
+    /// <summary>
+    /// Gets and sets weather the current weapon has penetrate damage
+    /// </summary>
     public bool Penetrate
     {
         get => penetrateDamage;
         set => penetrateDamage = value;
     }
-    //Returns the roll Distance of player
+    /// <summary>
+    /// returns the roll speed of player
+    /// </summary>
     public float Roll
     {
         get => rollSpeed;
     }
-    //Retruns the roll time of player
+    /// <summary>
+    /// Returns the roll distance of the player
+    /// </summary>
     public float RollDistance
     {
         get => rollDistance;
     }
-    //Returns the rolling rate
+    /// <summary>
+    /// Returns the rate at which player can roll
+    /// </summary>
     public float RollRate
     {
         get => rollRate;
@@ -193,12 +197,17 @@ public class PlayerStats : MonoBehaviour
         get => animator;
         set => animator = value;
     }
-    //Returns unarmed animator
+    /// <summary>
+    /// Returns the unarmed animator for the player
+    /// </summary>
     public RuntimeAnimatorController Unarmed
     {
         get => unarmedController;
     }
-    //Returns the location to parent weapons to
+    /// <summary>
+    /// Returns the location to parent weapons to(Right hand)
+    /// <para>Sorry lefties</para>
+    /// </summary>
     public GameObject PickUpTarget
     {
         get => pickUpTarget;

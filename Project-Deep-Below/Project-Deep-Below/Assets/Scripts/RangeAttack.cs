@@ -16,15 +16,18 @@ public class RangeAttack : MonoBehaviour
     }
     private void Update()
     {
+        //Strange way of offseting the fact that the weapon muzzle has a ton a sway with the animation being used
         this.transform.position = new Vector3(this.transform.position.x, startheight, this.transform.position.z);
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
+    //May need to change this to OnCollisionEnter
     private void OnTriggerEnter(Collider other)
     {
         //Destroy bullet if it hits boader first
+        //Not working at the momoent
         if(other.tag == "Boarder")
         {
-            Destroy(this.gameObject);
+            CleanUp();
         }
         else if(other.tag == "Enemy")
         {
@@ -45,15 +48,22 @@ public class RangeAttack : MonoBehaviour
         Debug.Log(_enemy.name + " hit for " + damage);
     }
 
+    //Allows Invoke to destory the game object
     private void CleanUp()
     {
         Destroy(this.gameObject);
     }
 
+    /// <summary>
+    /// Set the damage of the current instance
+    /// </summary>
     public int SetDamage
     {
         set => damage = value;
     }
+    /// <summary>
+    /// Set the speed of the current instance
+    /// </summary>
     public float Speed
     {
         set => speed = value;

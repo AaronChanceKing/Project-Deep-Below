@@ -6,15 +6,20 @@ using System.Collections.Generic;
 
 public class PlayerInventory : MonoBehaviour
 {
+    /// <summary>***DO NOT MODIFY***</summary>
     [SerializeField] private List<GameObject> inventory = new List<GameObject>();
+    /// <summary>The total amount of weapons the player can pick up at once</summary>
     [SerializeField] int inventoryMax = 2;
+    /// <summary>***DO NOT MODIFY***</summary>
     [SerializeField] GameObject currentWeapon = null;
+
     private Object[] preFabs;
     private int currentInventory = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Get access to all preFab weapons
         preFabs = Resources.LoadAll("PrefabWeapons", typeof(GameObject));
     }
 
@@ -43,9 +48,13 @@ public class PlayerInventory : MonoBehaviour
         RemoveFromInventory(currentWeapon);
         Equip(0);
     }
-    //Add item to inventory
+    /// <summary>
+    /// Add a new weapon into inventory
+    /// </summary>
+    /// <param name="_WeaponName">The name of the weapon that your adding</param>
     public void AddToInventory(string _WeaponName)
     {
+        //Check to make sure the inventory isnt full already
         if(inventory.Count < inventoryMax)
         {
             foreach(GameObject weapon in preFabs)
@@ -53,6 +62,7 @@ public class PlayerInventory : MonoBehaviour
                 if(weapon.name == _WeaponName)
                 {
                     inventory.Add(weapon);
+                    //If the weapon is ranged add it to the Ammo Manager
                     if(weapon.tag == "Ranged")
                     {
                         RangeCombat set = weapon.GetComponent<RangeCombat>();
@@ -61,12 +71,14 @@ public class PlayerInventory : MonoBehaviour
                 }
             }
         }
+        //If this is the first weapon picked up or the player is not currently holding a weapon equip first in list
         if(currentWeapon == null)
         {
             Equip(0);
         }
     }
     //Remove item from inventory
+    /// <param name="_weapon">Current weapon as a game object</param>
     private void RemoveFromInventory(GameObject _weapon)
     {
         foreach(GameObject weapon in preFabs)
@@ -84,6 +96,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
     //Equip weapon
+    /// <param name="_InventoryNumber">***-1, 0, and 1 ONLY***</param>
     private void Equip(int _InventoryNumber)
     {
         switch(_InventoryNumber)
@@ -121,6 +134,7 @@ public class PlayerInventory : MonoBehaviour
                 break;
         }
     }
+    //Method for setting weapon being swaped into
     private void SetWeapon()
     {
         Destroy(currentWeapon);
@@ -139,6 +153,7 @@ public class PlayerInventory : MonoBehaviour
             set.ClipMax = ammo[2];
         }
     }
+    //Helper method to set ammo of ranged weapons
     private void SetAmmo()
     {
         RangeCombat set = currentWeapon.GetComponent<RangeCombat>();

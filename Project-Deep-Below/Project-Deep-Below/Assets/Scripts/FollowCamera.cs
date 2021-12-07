@@ -7,7 +7,9 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
     //Variables
+    /// <summary>The GameObject that the camera will follow in game</summary>
     [SerializeField] private GameObject target;
+    /// <summary>The total amount of smoothing, higher numbers will make the camera less smooth</summary>
     [SerializeField] private float smoothedSpeed = 10f;
     [SerializeField] private Vector3 offset;
 
@@ -18,48 +20,4 @@ public class FollowCamera : MonoBehaviour
 
         transform.position = smoothedPosition;
     }
-
-    #region Getters
-    //Get what the camera is currently targeting
-    public GameObject GetTarget
-    {
-        get
-        {
-            return target;
-        }
-    }
-
-    //Not sure if ill need this but might as well go ahead and add it incase
-    //Get the cameras offset
-    public Vector3 GetOffset
-    {
-        get
-        {
-            return offset;
-        }
-    }
-
-    #endregion
-
-    #region Setters
-    //Set the target of the camera
-    public GameObject SetTarget
-    {
-        set
-        {
-            target = value;
-        }
-    }
-
-    //Should make it easier to 'film' cut scenes
-    //Set the offset of the camera
-    public Vector3 SetOffset
-    {
-        set
-        {
-            offset = value;
-        }
-    }
-
-    #endregion
 }

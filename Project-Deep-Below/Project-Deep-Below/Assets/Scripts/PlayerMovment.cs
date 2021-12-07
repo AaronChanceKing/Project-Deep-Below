@@ -7,19 +7,20 @@ using UnityEngine;
 
 public class PlayerMovment : MonoBehaviour
 {
-    //Variables
+    #region Variables
     //To Add Later
     private Animator animator;
-    //private AudioSource audioSorce;
+    //private AudioSource audioSource;
 
-    //For movment
+    //For movement
     private CharacterController controller;
     private PlayerStats stats;
-    private float speed;
 
     float rollBuffer = 0f;
     bool rolling = false;
     Vector3 roll;
+
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +29,9 @@ public class PlayerMovment : MonoBehaviour
         controller = this.GetComponent<CharacterController>();
         //Get access to player stats
         stats = PlayerStats.Instance;
-
-        //TODO
+        //Get access to player animator
         animator = GetComponentInChildren<Animator>();
+        //TODO
         //audioSorce = GetComponent<AudioSource>();
     }
 
@@ -50,33 +51,34 @@ public class PlayerMovment : MonoBehaviour
             StartCoroutine(PlayerRoll());
         }
         
-        //Is sprint button pushed down
-        speed = Input.GetButton("Sprint") && stats.Stamina > 0 ? stats.SprintSpeed : stats.BaseSpeed;
 
         PlayerDirection(mousePosition);
         PlayerMove(move);
         
-        DrainStamina(move);
         if (rolling)
         {
             Roll();
         }
     }
+
+    //Method that activly moves player once roll is pressed
     private void Roll()
     {
         controller.Move(roll * stats.Roll * Time.deltaTime);
     }
+
     //Method used for moving the character controller
     private void PlayerMove(Vector3 _Speed)
     {
         if (_Speed.magnitude >= .1f)
         {
-            controller.Move(_Speed * Time.deltaTime * speed);
+            controller.Move(_Speed * Time.deltaTime * stats.BaseSpeed);
         }
 
         animator.SetFloat("Speed", (Mathf.Abs(_Speed.x) + Mathf.Abs(_Speed.z)));
         
     }
+
     //Method to rotate the player in direction of the mouse
     private void PlayerDirection(Vector3 _MousePosition)
     {
@@ -91,32 +93,13 @@ public class PlayerMovment : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
     }
 
+    //Method that sets the animator for rolling as well as turns off roll after x time
     IEnumerator PlayerRoll()
     {
         animator.SetBool("Roll", rolling);
         yield return new WaitForSeconds(stats.RollDistance);
         rolling = false;
         animator.SetBool("Roll", rolling);
-    }
-
-    private void DrainStamina(Vector3 _Speed)
-    {
-        if(_Speed.magnitude >= .1f)
-        {
-            if (speed > stats.BaseSpeed && stats.Stamina > 0)
-            {
-                stats.Stamina -= (stats.StaminaDrain * 2);
-            }
-        }
-        //Need to remain still to gain stamina back
-        else if(_Speed.magnitude == 0)
-        {
-            if (stats.Stamina < stats.MaxStamina)
-            {
-                stats.Stamina += stats.StaminaDrain;
-            }
-        }
-
     }
 
 }

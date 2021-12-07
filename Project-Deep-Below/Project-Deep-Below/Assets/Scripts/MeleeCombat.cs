@@ -48,6 +48,7 @@ public class MeleeCombat : MonoBehaviour
         {
             if(_AttackChoice == 1)
             {
+                //This is what im using to do crit damage
                 damage = (int)((float)Math.Round((UnityEngine.Random.Range(1.0f, 2.0f) * GameManager.Instance.PlayerStats.BaseDamage), 1) * 10);
             }
             else if(_AttackChoice == 2)
@@ -58,6 +59,9 @@ public class MeleeCombat : MonoBehaviour
         GameManager.Instance.PlayerStats.Animation.SetTrigger("Attack");
     }
 
+    /// <summary>
+    /// Only using this method for animation events to be called
+    /// </summary>
     public void LightAttack()
     {
         foreach (Collider enemy in enemiesHit)
@@ -66,6 +70,9 @@ public class MeleeCombat : MonoBehaviour
             Debug.Log(enemy.name + " hit for " + damage);
         }
     }
+    /// <summary>
+    /// Only have this method to be able to have a diffrent name to distigiush them indie the animation event
+    /// </summary>
     public void HeavyAttack()
     {
         foreach (Collider enemy in enemiesHit)
